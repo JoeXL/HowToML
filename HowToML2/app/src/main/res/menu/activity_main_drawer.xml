@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item android:id="@+id/HTMLLnk" android:icon="@android:drawable/ic_menu_camera"
+            android:title="HTML" />
+        <item android:id="@+id/CSSLnk" android:icon="@android:drawable/ic_menu_gallery"
+            android:title="CSS" />
+        <item android:id="@+id/JsLnk" android:icon="@android:drawable/ic_menu_slideshow"
+            android:title="Javascript" />
+
+
+        <item android:id="@+id/FbShareLnk" android:icon="@drawable/facebook_256"
+            android:title="Facebook" />
+        <item android:id="@+id/TwtShareLnk" android:icon="@drawable/twitter_256"
+            android:title="Twitter" />
+        <item android:id="@+id/GPShareLnk" android:icon="@drawable/google_256"
+            android:title="Google+" />
+
+</menu>
