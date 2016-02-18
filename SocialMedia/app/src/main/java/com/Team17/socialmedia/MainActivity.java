@@ -75,6 +75,25 @@ public class MainActivity extends Activity {
 
 
 
+        //create the send intent
+        Intent shareIntent =
+                new Intent(android.content.Intent.ACTION_SEND);
+
+        //set the type
+        shareIntent.setType("text/plain");
+
+        //add a subject
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "HowToML");
+
+        //build the body of the message to be shared
+        String shareMessage = "I've just completed a level on HowToML! ******Then link to our app in play store";
+
+        //add the message
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareMessage);
+
+        //start the chooser for sharing
+        startActivity(Intent.createChooser(shareIntent, "Which app are you going to share to!"));
+
 
 
     }
@@ -84,13 +103,10 @@ public class MainActivity extends Activity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    File myImageFile = new File("C:/Users/George/Dropbox/Team Documents/Designs/Vish Designs/htmlhowtologo.png");
-    Uri myImageUri = Uri.fromFile(myImageFile);
+    /*
+    code implementing twitter share was here and is currently temporarily in notepad
+     */
 
-    public void shareTweet() {
-        TweetComposer.Builder builder = new TweetComposer.Builder(this)
-                .text("I've completed another level on HowToML!")
-                .image(myImageUri);
-        builder.show();
-    }
+
+
 }
