@@ -17,14 +17,22 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="ae5a774f7c25a3f93b878c7c24eb9fd87f5bd991" />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges = "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/app_name" />
 
+        <provider
+            android:authorities="com.facebook.app.FacebookContentProvider1563065567347830"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
+
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
-
+    Facebot
 
 </manifest>

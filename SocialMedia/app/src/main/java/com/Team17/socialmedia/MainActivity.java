@@ -18,6 +18,13 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 
+import io.fabric.sdk.android.Fabric;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+
+import java.io.File;
+
 public class MainActivity extends Activity {
     private TextView info;
     private LoginButton loginButton;
@@ -45,10 +52,12 @@ public class MainActivity extends Activity {
                                 + loginResult.getAccessToken().getToken()
                 );
             }
+
             @Override
             public void onCancel() {
                 info.setText("Login attempt cancelled.");
             }
+
             @Override
             public void onError(FacebookException e) {
                 info.setText("Login attempt failed.");
@@ -56,9 +65,32 @@ public class MainActivity extends Activity {
 
         });
 
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse("https://developers.facebook.com"))
+                .build();
+
+
+        TwitterAuthConfig authConfig = new TwitterAuthConfig("05iACK0HOD3tjAwIAh4DHfXm7","K3HcLD5yAphXUwQLKBgbEmtXqtV3tutDMpULKHmLiYC3OeKSMN");
+        Fabric.with(this, new Twitter(authConfig), new TweetComposer());
+
+
+
+
+
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    File myImageFile = new File("C:/Users/George/Dropbox/Team Documents/Designs/Vish Designs/htmlhowtologo.png");
+    Uri myImageUri = Uri.fromFile(myImageFile);
+
+    public void shareTweet() {
+        TweetComposer.Builder builder = new TweetComposer.Builder(this)
+                .text("I've completed another level on HowToML!")
+                .image(myImageUri);
+        builder.show();
     }
 }
