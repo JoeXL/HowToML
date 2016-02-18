@@ -6,6 +6,13 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.facebook.CallbackManager;
@@ -28,6 +35,7 @@ import java.io.File;
 public class MainActivity extends Activity {
     private TextView info;
     private LoginButton loginButton;
+    private Button shareButton;
     private CallbackManager callbackManager;
 
     @Override
@@ -36,6 +44,8 @@ public class MainActivity extends Activity {
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
+
+
 
         setContentView(R.layout.activity_main);
         info = (TextView)findViewById(R.id.info);
@@ -70,10 +80,22 @@ public class MainActivity extends Activity {
                 .build();
 
 
+        shareButton = (Button)findViewById(R.id.share_button);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                share();
+            }
+        });
+
         TwitterAuthConfig authConfig = new TwitterAuthConfig("05iACK0HOD3tjAwIAh4DHfXm7","K3HcLD5yAphXUwQLKBgbEmtXqtV3tutDMpULKHmLiYC3OeKSMN");
         Fabric.with(this, new Twitter(authConfig), new TweetComposer());
 
 
+
+
+    }
+
+    private void share() {
 
         //create the send intent
         Intent shareIntent =
@@ -82,21 +104,17 @@ public class MainActivity extends Activity {
         //set the type
         shareIntent.setType("text/plain");
 
-        //add a subject
-        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "HowToML");
-
         //build the body of the message to be shared
-        String shareMessage = "I've just completed a level on HowToML! ******Then link to our app in play store";
+        String shareMessage = "I've just completed a level on HowToML! ******Then link to our app in play store*********";
 
         //add the message
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "HowToML");
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareMessage);
 
         //start the chooser for sharing
         startActivity(Intent.createChooser(shareIntent, "Which app are you going to share to!"));
-
-
-
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

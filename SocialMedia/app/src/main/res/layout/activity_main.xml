@@ -22,15 +22,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/button"
-        android:layout_toEndOf="@+id/button"
         android:layout_marginBottom="58dp" />
 
     <Button
+        android:id="@+id/share_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="shareTweet"
-        android:id="@+id/button" />
-
+        android:background="@drawable/sharing"
+        android:height="500dp"
+        android:maxHeight="200dp"
+        android:maxWidth="200dp"
+        android:minHeight="200dp"
+        android:width="50dp"
+        android:layout_toRightOf="@+id/login_button"
+        android:layout_toEndOf="@+id/login_button"
+        android:layout_alignTop="@+id/login_button" />
 
 </RelativeLayout>
