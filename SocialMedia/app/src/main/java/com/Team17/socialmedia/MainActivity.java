@@ -2,35 +2,17 @@ package com.Team17.socialmedia;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.TextView;
-
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.model.SharePhoto;
-import com.facebook.share.model.SharePhotoContent;
 
-import io.fabric.sdk.android.Fabric;
-import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.tweetcomposer.TweetComposer;
-
-import java.io.File;
 
 public class MainActivity extends Activity {
     private TextView info;
@@ -45,8 +27,6 @@ public class MainActivity extends Activity {
         FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
 
-
-
         setContentView(R.layout.activity_main);
         info = (TextView)findViewById(R.id.info);
         loginButton = (LoginButton)findViewById(R.id.login_button);
@@ -55,11 +35,7 @@ public class MainActivity extends Activity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 info.setText(
-                        "User ID: "
-                                + loginResult.getAccessToken().getUserId()
-                                + "\n"
-                                + "Auth Token: "
-                                + loginResult.getAccessToken().getToken()
+                        "Login successful"
                 );
             }
 
@@ -75,23 +51,12 @@ public class MainActivity extends Activity {
 
         });
 
-        ShareLinkContent content = new ShareLinkContent.Builder()
-                .setContentUrl(Uri.parse("https://developers.facebook.com"))
-                .build();
-
-
         shareButton = (Button)findViewById(R.id.share_button);
         shareButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 share();
             }
         });
-
-        TwitterAuthConfig authConfig = new TwitterAuthConfig("05iACK0HOD3tjAwIAh4DHfXm7","K3HcLD5yAphXUwQLKBgbEmtXqtV3tutDMpULKHmLiYC3OeKSMN");
-        Fabric.with(this, new Twitter(authConfig), new TweetComposer());
-
-
-
 
     }
 
@@ -112,19 +77,12 @@ public class MainActivity extends Activity {
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareMessage);
 
         //start the chooser for sharing
-        startActivity(Intent.createChooser(shareIntent, "Which app are you going to share to!"));
+        startActivity(Intent.createChooser(shareIntent, "Which app are you going to share with:"));
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
-
-    /*
-    code implementing twitter share was here and is currently temporarily in notepad
-     */
-
-
 
 }
