@@ -16,9 +16,12 @@
 
 
     </android.support.design.widget.AppBarLayout>
+<!--
+    TEMP: JUST SO I CAN SWAP THESE ROUND FOR VIEWING
+    <include layout="@layout/activity_lesson" />
+-->
 
     <include layout="@layout/content_main" />
-
     <!-- The floating action button. NOT IN USE
     <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
         android:layout_width="wrap_content" android:layout_height="wrap_content"

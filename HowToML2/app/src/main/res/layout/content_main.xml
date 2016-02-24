@@ -11,36 +11,48 @@
     android:nestedScrollingEnabled="true"
     android:scrollIndicators="right">
 
-    <ImageButton
-        android:layout_width="340dp"
-        android:layout_height="90dp"
-        android:id="@+id/HTMLLnkMain"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:background="#009900"
-        android:src="@drawable/button_html"
-        android:scaleType="centerCrop" />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ScrollViewMain"
+        android:layout_above="@+id/HTMLLnkMain"
+        android:layout_alignParentStart="true" >
 
-    <ImageButton
-        android:layout_width="340dp"
-        android:layout_height="90dp"
-        android:id="@+id/CSSLnkMain"
-        android:layout_below="@+id/HTMLLnkMain"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:background="#0000FF"
-        android:src="@drawable/button_css"
-        android:scaleType="centerCrop" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageButton
-        android:layout_width="340dp"
-        android:layout_height="90dp"
-        android:id="@+id/JsLnkMain"
-        android:layout_below="@+id/CSSLnkMain"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:background="#FF0000"
-        android:src="@drawable/button_jscript"
-        android:scaleType="centerCrop" />
+            <ImageButton
+                android:layout_width="320dp"
+                android:layout_height="90dp"
+                android:id="@+id/HTMLLnkMain"
+                android:layout_marginTop="10dp"
+                android:background="#009900"
+                android:src="@drawable/button_html"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/htmldescription" />
+
+            <ImageButton
+                android:layout_width="320dp"
+                android:layout_height="90dp"
+                android:id="@+id/CSSLnkMain"
+                android:layout_marginTop="30dp"
+                android:background="#0000FF"
+                android:src="@drawable/button_css"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/cssdescription" />
+
+            <ImageButton
+                android:layout_width="320dp"
+                android:layout_height="90dp"
+                android:id="@+id/JsLnkMain"
+                android:layout_marginTop="30dp"
+                android:background="#FF0000"
+                android:src="@drawable/button_jscript"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/javascriptdescription" />
+        </LinearLayout>
+    </ScrollView>
+
 </RelativeLayout>
