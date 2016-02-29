@@ -47,14 +47,18 @@
         android:id="@+id/Back"
         android:src="@drawable/previous"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:theme="@android:style/Holo.ButtonBar"
+        android:contentDescription="@string/buttonName" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Forward"
         android:src="@drawable/next"
+        android:theme="@android:style/Holo.ButtonBar"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/Back" />
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/buttonName2" />
 
 </RelativeLayout>
