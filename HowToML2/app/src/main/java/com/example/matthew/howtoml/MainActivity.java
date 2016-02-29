@@ -1,5 +1,6 @@
 package com.example.matthew.howtoml;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -219,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "clicked " + listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).toString(), Toast.LENGTH_SHORT).show();
                 mDrawerLayout.closeDrawers();
                 //Load new page code goes here
+                startActivity(new Intent(MainActivity.this, LessonActivity.class));
                 return true;
             }
         });
