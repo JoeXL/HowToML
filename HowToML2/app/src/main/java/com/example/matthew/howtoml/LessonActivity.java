@@ -1,9 +1,13 @@
 package com.example.matthew.howtoml;
 
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ExpandableListView;
 
-public class LessonActivity extends AppCompatActivity {
+public class LessonActivity extends MainActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

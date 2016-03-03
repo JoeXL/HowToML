@@ -1,5 +1,6 @@
 package com.example.matthew.howtoml;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,7 +17,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout;
+    DrawerLayout mDrawerLayout;
     LanguagesListAdapter mMenuAdapter;
     ExpandableListView expandableList;
     List<ExpandedLanguagesListModel> listDataHeader;
@@ -55,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
         expandableList.setAdapter(mMenuAdapter);
 
-      /*  FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }*/
 
-    private void prepareListData() {
+    public void prepareListData() {
         listDataHeader = new ArrayList<ExpandedLanguagesListModel>();
         listDataChild = new HashMap<ExpandedLanguagesListModel, List<String>>();
 
@@ -193,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
+    public void setupDrawerContent(NavigationView navigationView) {
         expandableList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             // Keep track of previous expanded parent
             int previousGroup = -1;
@@ -205,8 +209,30 @@ public class MainActivity extends AppCompatActivity {
                     expandableList.collapseGroup(previousGroup);
                 }
                 previousGroup = groupPosition;
-                ImageButton background = (ImageButton) findViewById(R.id.HowToMLHeaderLink);
-                background.setBackground(getResources().getDrawable(R.drawable.header_blue));
+                if(groupPosition == 0) {
+                    ImageButton logoBackground = (ImageButton) findViewById(R.id.HowToMLHeaderLink);
+                    ImageButton languageBackground = (ImageButton) findViewById(R.id.htmlHeaderLink);
+                    RelativeLayout navHeaderBackground = (RelativeLayout) findViewById(R.id.nav_header);
+                    logoBackground.setBackground(getResources().getDrawable(R.drawable.header_green));
+                    languageBackground.setBackground(getResources().getDrawable(R.drawable.button_html));
+                    navHeaderBackground.setBackgroundColor(Color.parseColor("#0d9445"));
+                }
+                else if(groupPosition == 1) {
+                    ImageButton logoBackground = (ImageButton) findViewById(R.id.HowToMLHeaderLink);
+                    ImageButton languageBackground = (ImageButton) findViewById(R.id.htmlHeaderLink);
+                    RelativeLayout navHeaderBackground = (RelativeLayout) findViewById(R.id.nav_header);
+                    logoBackground.setBackground(getResources().getDrawable(R.drawable.header_blue));
+                    languageBackground.setBackground(getResources().getDrawable(R.drawable.button_css));
+                    navHeaderBackground.setBackgroundColor(Color.parseColor("#224098"));
+                }
+                else {
+                    ImageButton logoBackground = (ImageButton) findViewById(R.id.HowToMLHeaderLink);
+                    ImageButton languageBackground = (ImageButton) findViewById(R.id.htmlHeaderLink);
+                    RelativeLayout navHeaderBackground = (RelativeLayout) findViewById(R.id.nav_header);
+                    logoBackground.setBackground(getResources().getDrawable(R.drawable.header_red));
+                    languageBackground.setBackground(getResources().getDrawable(R.drawable.button_jscript));
+                    navHeaderBackground.setBackgroundColor(Color.parseColor("#c01d2e"));
+                }
             }
         });
 
@@ -221,6 +247,7 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.closeDrawers();
                 //Load new page code goes here
                 startActivity(new Intent(MainActivity.this, LessonActivity.class));
+
                 return true;
             }
         });
