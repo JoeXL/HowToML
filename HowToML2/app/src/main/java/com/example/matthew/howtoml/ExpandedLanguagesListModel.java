@@ -1,5 +1,6 @@
 package com.example.matthew.howtoml;
 
+/* Some get/set methods for the Expandable List? */
 public class ExpandedLanguagesListModel {
     String iconName = "";
     int iconImg = -1; // menu icon resource id
