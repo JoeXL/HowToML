@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">HowToML</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="html_HeaderLink">HTML_Header</string>
+    <string name="howToML">HowToMLLogo</string>
+    <string name="Lorem">Lorem ipsum dolor sit amet, ius periculis consetetur ullamcorper no. His hendrerit expetendis
+        ne, per an veniam oporteat maluisset. Ad has tantas prodesset, cum ad debet fabulas efficiantur, ius congue feugiat
+        expetendis ne. Nec cu idque eruditi adolescens.
+        Lorem ipsum dolor sit amet, ius periculis consetetur ullamcorper no. His hendrerit expetendis
+        ne, per an veniam oporteat maluisset. Ad has tantas prodesset, cum ad debet fabulas efficiantur, ius congue feugiat
+        expetendis ne. Nec cu idque eruditi adolescens.
+    </string>
+    <string name="HTMLTitle">HTML 101</string>
+    <string name="cssdescription">LinkToCSS</string>
+    <string name="htmldescription">LinkToHTML</string>
+    <string name="javascriptdescription">LinkToJS</string>
+    <string name="buttonName">PreviousButton</string>
+    <string name="buttonName2">NextButton</string>
+    <string name="facebook_app_id">1563065567347830</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
