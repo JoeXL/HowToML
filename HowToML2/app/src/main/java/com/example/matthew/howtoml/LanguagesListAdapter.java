@@ -14,8 +14,6 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
-
-/* Not gonna lie, no idea what most of this does and it is mostly a direct copy 'n' paste */
 public class LanguagesListAdapter extends BaseExpandableListAdapter {
     private Context mContext;
     private List<com.example.matthew.howtoml.ExpandedLanguagesListModel> mListDataHeader; // header titles

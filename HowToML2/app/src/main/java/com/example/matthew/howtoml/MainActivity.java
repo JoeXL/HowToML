@@ -28,7 +28,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    /* Initialise expandable list components */
     DrawerLayout mDrawerLayout;
     LanguagesListAdapter mMenuAdapter;
     ExpandableListView expandableList;
@@ -45,20 +44,18 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setBackgroundColor(Color.parseColor("#ff6600"));
 
-        /* Create Navigation Drawer */
         final ActionBar ab = getSupportActionBar();
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         expandableList = (ExpandableListView)findViewById(R.id.navigationmenu);
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
 
-        /* If the drawer exists add the content */
         if(navigationView != null) {
             setupDrawerContent(navigationView);
         }
 
-        /* Add the content to the expandable list and set up the adapter */
         prepareListData();
         mMenuAdapter = new LanguagesListAdapter(this, listDataHeader, listDataChild, expandableList);
+
         expandableList.setAdapter(mMenuAdapter);
 
         /*
@@ -85,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //If  the drawer is open, close it, if not minimize the app
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -100,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }*/
 
-    /* Expandable list data */
     public void prepareListData() {
         listDataHeader = new ArrayList<ExpandedLanguagesListModel>();
         listDataChild = new HashMap<ExpandedLanguagesListModel, List<String>>();
@@ -202,7 +197,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /* Navigation drawer data */
     public void setupDrawerContent(NavigationView navigationView) {
         expandableList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             // Keep track of previous expanded parent
@@ -215,8 +209,6 @@ public class MainActivity extends AppCompatActivity {
                     expandableList.collapseGroup(previousGroup);
                 }
                 previousGroup = groupPosition;
-                /*  Change the header of the Navigation Drawer depending on what
-                 *  parent option is selected. 0 = HTML, 1 = CSS, Other = JavaScript */
                 if(groupPosition == 0) {
                     ImageButton logoBackground = (ImageButton) findViewById(R.id.HowToMLHeaderLink);
                     ImageButton languageBackground = (ImageButton) findViewById(R.id.htmlHeaderLink);
@@ -244,8 +236,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /* Open a page depending on what child option is selected. Currently doesn't
-         * distinguish between options and thus always opens the same page. */
         expandableList.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
