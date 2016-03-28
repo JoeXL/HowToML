@@ -28,7 +28,18 @@
 
 -->
 
+    <!-- Removed for fragments code, instead includes layout xml that contains the fragments -->
     <include layout="@layout/content_main" />
+
+    <!--<include layout="@layout/fragment_layout" />-->
+    <!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:id="@+id/fragment_container">
+        <fragment class="com.example.matthew.howtoml.LessonFragment"
+            android:id="@+id/titles"
+            android:layout_width="match_parent" android:layout_height="match_parent" />
+    </FrameLayout>-->
+
     <!-- The floating action button. NOT IN USE
     <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
         android:layout_width="wrap_content" android:layout_height="wrap_content"

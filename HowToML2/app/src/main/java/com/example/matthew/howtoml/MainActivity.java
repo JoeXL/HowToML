@@ -1,6 +1,7 @@
 package com.example.matthew.howtoml;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -257,6 +258,15 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.closeDrawers();
                 //Load new page code goes here
                 startActivity(new Intent(MainActivity.this, LessonActivity.class));
+
+                /* Fragment code */
+                //Fragment newFragment = new LessonFragment();
+                //FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                //transaction.replace(R.id.fragment_container, newFragment);
+                //transaction.addToBackStack(null);
+
+                //transaction.commit();
 
                 return true;
             }
