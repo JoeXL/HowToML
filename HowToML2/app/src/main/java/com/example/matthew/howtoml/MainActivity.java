@@ -2,11 +2,8 @@ package com.example.matthew.howtoml;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,10 +12,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -79,8 +74,14 @@ public class MainActivity extends AppCompatActivity {
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //navigationView.setNavigationItemSelectedListener(this);
+        /* Setup homepage fragment */
+        /* Create new HomepageFragment and a FragmentTransaction */
+        Fragment newHomepageFragment = new HomepageFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        /* Replace the fragment that is loaded in fragment_frame with the new fragment */
+        transaction.replace(R.id.fragment_frame, newHomepageFragment);
+        transaction.addToBackStack(null); //Think this can be used to navigate through previous pages when pressing the back button. If so I assume it will be accessed again in the onBackPressed() method.
+        transaction.commit();
     }
 
     @Override
@@ -90,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            /* One thing I've noticed is that if the back button is pressed to minimize the app, when it is loaded again
+             * it will load the homepage fragment, however if it is minimized by pressing the home button on android, it
+             * will still load the lesson fragment. Don't think it'll matter though as we'll probably want the backButton
+             * to load the homepage if a lesson is already loaded, so this code will change anyway. */
             super.onBackPressed();
         }
     }
@@ -106,28 +111,20 @@ public class MainActivity extends AppCompatActivity {
         listDataHeader = new ArrayList<ExpandedLanguagesListModel>();
         listDataChild = new HashMap<ExpandedLanguagesListModel, List<String>>();
 
+        /* Initialise parents in the expandable list */
         ExpandedLanguagesListModel item1 = new ExpandedLanguagesListModel();
         item1.setIconName("HTML");
-        //item1.setIconImg(R.drawable.facebook);
-        // Adding data header
         listDataHeader.add(item1);
 
         ExpandedLanguagesListModel item2 = new ExpandedLanguagesListModel();
         item2.setIconName("CSS");
-        //item2.setIconImg(R.drawable.facebook);
         listDataHeader.add(item2);
 
         ExpandedLanguagesListModel item3 = new ExpandedLanguagesListModel();
-        item3.setIconName("JS(WHY DOESN'T THIS WORK");
-        //item3.setIconImg(R.drawable.facebook);
+        item3.setIconName("JavaScript");
         listDataHeader.add(item3);
 
-        ExpandedLanguagesListModel item4 = new ExpandedLanguagesListModel();
-        item4.setIconName("JS(WHY DOES THIS WORK)");
-        //item3.setIconImg(R.drawable.facebook);
-        listDataHeader.add(item4);
-
-        // Adding child data
+        /* Create arrays to be stored within each parent in the expandable list */
         List<String> heading1 = new ArrayList<String>();
         heading1.add("Lesson 1");
         heading1.add("Lesson 2");
@@ -170,24 +167,10 @@ public class MainActivity extends AppCompatActivity {
         heading3.add("Lesson 10");
         heading3.add("Quiz 2");
 
-        List<String> heading4 = new ArrayList<String>();
-        heading4.add("Lesson 1");
-        heading4.add("Lesson 2");
-        heading4.add("Lesson 3");
-        heading4.add("Lesson 4");
-        heading4.add("Lesson 5");
-        heading4.add("Quiz 1");
-        heading4.add("Lesson 6");
-        heading4.add("Lesson 7");
-        heading4.add("Lesson 8");
-        heading4.add("Lesson 9");
-        heading4.add("Lesson 10");
-        heading4.add("Quiz 2");
-
-        listDataChild.put(listDataHeader.get(0), heading1);// Header, Child data
+        /* Add the child lists to the parents */
+        listDataChild.put(listDataHeader.get(0), heading1);
         listDataChild.put(listDataHeader.get(1), heading2);
         listDataChild.put(listDataHeader.get(2), heading3);
-        listDataChild.put(listDataHeader.get(3), heading4);
     }
 
     @Override
@@ -206,12 +189,12 @@ public class MainActivity extends AppCompatActivity {
     /* Navigation drawer data */
     public void setupDrawerContent(NavigationView navigationView) {
         expandableList.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            // Keep track of previous expanded parent
+            /* Keep track of previous expanded parent */
             int previousGroup = -1;
 
             @Override
             public void onGroupExpand(int groupPosition) {
-                // Collapse previous parent if expanded.
+                /* Collapse previous parent if expanded */
                 if ((previousGroup != -1) && (groupPosition != previousGroup)) {
                     expandableList.collapseGroup(previousGroup);
                 }
@@ -254,19 +237,27 @@ public class MainActivity extends AppCompatActivity {
                 int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForChild(groupPosition, childPosition));
                 parent.setItemChecked(index, true);
 
+                /* Display a small toast message that display what what selected */
                 Toast.makeText(MainActivity.this, "clicked " + listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).toString(), Toast.LENGTH_SHORT).show();
                 mDrawerLayout.closeDrawers();
-                //Load new page code goes here
-                startActivity(new Intent(MainActivity.this, LessonActivity.class));
 
                 /* Fragment code */
-                //Fragment newFragment = new LessonFragment();
-                //FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                /* Create new LessonFragment and a FragmentTransaction */
+                Fragment newLessonFragment = new LessonFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-                //transaction.replace(R.id.fragment_container, newFragment);
-                //transaction.addToBackStack(null);
+                /* The next 3 lines are a direct copy/paste from a tutorial that should allow arguments to be passed that can be used in the onCreate method
+                 * of the LessonFragment class. Not sure exactly how it needs to be implemented in our app which is why I've left it commented out,
+                 * but it should be possible to use an id (or something) from list in the navigation drawer to load a certain lesson within the fragment.
+                 * I've also left the code from the tutorial that the fragment uses in the LessonFragment class.*/
+                //Bundle args = new Bundle();
+                //args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
+                //fragment.setArguments(args);
 
-                //transaction.commit();
+                /* Replace the fragment that is loaded in fragment_frame with the new fragment */
+                transaction.replace(R.id.fragment_frame, newLessonFragment);
+                transaction.addToBackStack(null); //Think this can be used to navigate through previous pages when pressing the back button. If so I assume it will be accessed again in the onBackPressed() method.
+                transaction.commit();
 
                 return true;
             }
